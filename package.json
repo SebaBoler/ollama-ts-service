@@ -8,8 +8,9 @@
   "license": "ISC",
   "description": "",
   "scripts": {
+    "dev": "nodemon --exec \"node --loader ts-node/esm src/app.ts\"",
     "start": "node dist/index.js",
-    "build": "tsc",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
