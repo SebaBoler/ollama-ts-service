@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import chalk from 'chalk';
 import generateRoute from './routes/generateRoute';
 import limiter from './middleware/rateLimiter';
-src/middleware/rateLimiter.ts
+
 dotenv.config();
 
 const app = express();

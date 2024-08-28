@@ -39,4 +39,3 @@ router.post('/generate', async (req: Request, res: Response) => {
 });
 
 export default router;
-
