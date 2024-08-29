@@ -4,8 +4,8 @@ import {
   OllamaResponseSchema,
   OllamaResponse,
 } from "../types/ollamaResponseTypes";
-import { isModelAvailable } from "../services/ollamaService";
 import axios, { AxiosError } from "axios";
+import { isModelAvailable } from "../services/ollamaService";
 import { z } from "zod";
 
 const router = express.Router();
@@ -26,7 +26,7 @@ router.post("/generate", async (req: Request, res: Response) => {
       }
     }
     const ollamaResponse = await axios.post<OllamaResponse>(
-      process.env.OLLAMA_API_URL!,
+  `${process.env.OLLAMA_API_URL}/api/generate`,
       {
         model: validatedData.model,
         prompt: validatedData.prompt,
@@ -38,7 +38,6 @@ router.post("/generate", async (req: Request, res: Response) => {
 
     res.json(validatedResponse);
   } catch (error) {
-    const errors = error as Error | AxiosError;
 
     if (error instanceof z.ZodError) {
       res
