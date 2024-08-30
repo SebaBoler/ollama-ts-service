@@ -60,11 +60,22 @@ Send a POST request to `/generate` with the following body:
 
 ```json
 {
-  "model": "llama3.1",
-  "prompt": "Your query here",
-  "stream": false
-}
+  "model": "llama3.1:8b",
+  "prompt": "How are you today "
+}'
 ```
+
+Here you have completed curl to import
+
+```bash
+curl --location 'http://localhost:3000/generate' \
+--header 'Content-Type: application/json' \
+--data '{
+           "model": "llama3.1:8b",
+           "prompt": "How are you today "
+         }'
+```
+
 
 🔧 Configuration
 Customize the service using these environment variables:
@@ -73,6 +84,7 @@ Customize the service using these environment variables:
 - `PORT`: Server listening port
 - `RATE_LIMIT_WINDOW_MS`: Rate limiting time window (milliseconds)
 - `RATE_LIMIT_MAX_REQUESTS`: Maximum requests per time window
+- `VALIDATE_MODEL`: Validates if the model is available  
 
 🤝 Contributing
 We welcome contributions! Please see our Contributing Guide for more details.
