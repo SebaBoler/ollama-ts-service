@@ -32,7 +32,7 @@ npm install
 
 3. Configure your `.env` file:
 ```text
-OLLAMA_API_URL=http://localhost:11434/api/generate
+OLLAMA_API_URL=http://127.0.0.1:11434/api/generate
 PORT=3000
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100

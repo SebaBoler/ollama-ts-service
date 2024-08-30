@@ -9,9 +9,6 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const url = `http://localhost:${port}`;
-const ollamaApiUrl =
-  process.env.OLLAMA_API_URL ?? "http://localhost:11434/api/generate";
-const validateModel = process.env.VALIDATE_MODEL === "true";
 
 app.use(limiter);
 

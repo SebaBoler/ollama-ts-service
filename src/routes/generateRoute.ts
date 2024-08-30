@@ -7,8 +7,12 @@ import {
 import axios, { AxiosError } from "axios";
 import { isModelAvailable } from "../services/ollamaService";
 import { z } from "zod";
+import { measureResponseTime } from "../middleware/responseTime";
 
 const router = express.Router();
+
+router.use(measureResponseTime);
+
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "API is working" });
@@ -19,6 +23,7 @@ router.post("/generate", async (req: Request, res: Response) => {
     const validatedData = OllamaRequestSchema.parse(req.body);
     if (process.env.VALIDATE_MODEL === "true") {
       const modelAvailable = await isModelAvailable(validatedData.model);
+
       if (!modelAvailable) {
         return res
           .status(400)
@@ -33,10 +38,13 @@ router.post("/generate", async (req: Request, res: Response) => {
         stream: validatedData.stream ?? false,
       }
     );
-
     const validatedResponse = OllamaResponseSchema.parse(ollamaResponse.data);
+    const totalDurationMs = (ollamaResponse.data.total_duration / 1e6).toFixed(2);
 
-    res.json(validatedResponse);
+   res.json({
+     ...validatedResponse,
+      total_duration: `${totalDurationMs} ms`,
+   });
   } catch (error) {
 
     if (error instanceof z.ZodError) {
